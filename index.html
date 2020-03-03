@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Demo Menu</title>
+	<link rel="stylesheet" type="text/css" href="public/LNpGYX.scss.css">
+	<link rel="stylesheet" href="public/LNpGYX.css">
+  <link rel="stylesheet" type="text/css" href="public/main.css">
+  <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+  <script type="" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+  <script type="text/javascript" src="public/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="public/jquery.reflection.js"></script>
+  <script type="text/javascript" src="public/jquery.cloud9carousel.js"></script>
+</head>
+<body>
+	<nav class="nav" style="z-index: 1000;">
+  <div class="group">
+    <a class="logo-link"><span class="logo">LOGO</span><i class="fa fa-home"></i></a>
+    <div class="nav-toggle">
+      <button class="c-hamburger c-hamburger--htx">
+        <span></span>
+      </button>
+    </div>
+  </div>
+    <ul class="nav-items">
+      <li class="first-level-item">
+        <i class="fa fa-smile-o fa-fw"></i>
+        <span class="nav-item-text">Smile</span>
+        <ul class="sub-nav">
+          <li><i class="fa fa-star-o fa-fw"></i> This Star Is Empty</li>
+          <li><i class="fa fa-star-half-o fa-fw"></i> This Star Is Half Full</li>
+          <li><i class="fa fa-star fa-fw"></i> This Star Is Full</li>
+        </ul>
+      </li>
+      <li class="first-level-item">
+        <i class="fa fa-diamond fa-fw"></i>
+        <span class="nav-item-text">Diamonds</span>
+      </li>
+      <li class="first-level-item">
+        <i class="fa fa-hand-peace-o fa-fw"></i>
+        <span class="nav-item-text">Peace</span>
+      </li>
+      <li class="first-level-item">
+        <i class="fa fa-map-o fa-fw"></i>
+        <span class="nav-item-text">Map</span>
+      </li>
+      <li class="first-level-item">
+        <i class="fa fa-rocket fa-fw"></i>
+        <span class="nav-item-text">Rocket</span>
+      </li>
+      <li class="first-level-item">
+        <i class="fa fa-send-o fa-fw"></i>
+        <span class="nav-item-text">Airplane</span>
+      </li>
+    </ul>
+</nav>
+
+<section class="main">
+    <div id="wrap" >
+        <div id="showcase" class="noselect"> <img class="cloud9-item" src="firefox.png" alt="Firefox"> <img class="cloud9-item" src="wyzo.png" alt="Wyzo"> <img class="cloud9-item" src="opera.png" alt="Opera"> <img class="cloud9-item" src="chrome.png" alt="Chrome"> <img class="cloud9-item" src="iexplore.png" alt="Internet Explorer"> <img class="cloud9-item" src="safari.png" alt="Safari"> </div>
+        <p id="item-title">&nbsp;</p>
+  </div>
+  <div class="nav-open-overlay"></div>
+</section>
+</body>
+<script type="text/javascript" src="public/LNpGYX.js"></script>
+<script>
+        $(function() {
+            var showcase = $("#showcase")
+
+            showcase.Cloud9Carousel({
+                yPos: 42,
+                yRadius: 48,
+                mirrorOptions: {
+                    gap: 12,
+                    height: 0.2
+                },
+                buttonLeft: $(".nav > .left"),
+                buttonRight: $(".nav > .right"),
+                autoPlay: true,
+                bringToFront: true,
+                onRendered: showcaseUpdated,
+                onLoaded: function() {
+                    showcase.css('visibility', 'visible')
+                    showcase.css('display', 'none')
+                    showcase.fadeIn(1500)
+                }
+            })
+
+            function showcaseUpdated(showcase) {
+                var title = $('#item-title').html(
+                    $(showcase.nearestItem()).attr('alt')
+                )
+
+                var c = Math.cos((showcase.floatIndex() % 1) * 2 * Math.PI)
+                title.css('opacity', 0.5 + (0.5 * c))
+            }
+
+            // Simulate physical button click effect
+            $('.nav > button').click(function(e) {
+                var b = $(e.target).addClass('down')
+                setTimeout(function() {
+                    b.removeClass('down')
+                }, 80)
+            })
+
+            $(document).keydown(function(e) {
+                //
+                // More codes: http://www.javascripter.net/faq/keycodes.htm
+                //
+                switch (e.keyCode) {
+                    /* left arrow */
+                    case 37:
+                        $('.nav > .left').click()
+                        break
+
+                        /* right arrow */
+                    case 39:
+                        $('.nav > .right').click()
+                }
+            })
+        })
+    </script>
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-36251023-1']);
+        _gaq.push(['_setDomainName', 'jqueryscript.net']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+</html>
